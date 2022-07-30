@@ -1,0 +1,11 @@
+<a  [routerLink]="[id]"
+     routerLinkActive="active"               >
+    <span>
+        <h3>{{element.name}}</h3>
+        <p>{{element.description}}</p>
+    </span>
+
+    <span>
+        <img [src]="element.imagepath"   alt="{{element.name}}"   style="max-height: 50px;"      />
+    </span>
+</a>
