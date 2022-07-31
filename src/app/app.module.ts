@@ -12,6 +12,7 @@ import { ShoppingComponent } from './shopping/shopping.component';
 import { ShopEditComponent } from './shopping/shop-edit/shop-edit.component';
 import { RecipesDirective } from './recipes.directive';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +28,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

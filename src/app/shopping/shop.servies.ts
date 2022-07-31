@@ -41,7 +41,12 @@ export class ShopServices{
    }
 
 
+   
+   gettingdatarecipetoshop(ingredient:Ingredient[]){
+    this.ingredient.push(...ingredient)
+    this.Shopupdatenew.emit(this.ingredient.slice())
 
+  }
 
 
 }

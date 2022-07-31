@@ -9,6 +9,7 @@ import { ShoppingComponent } from './shopping/shopping.component';
 const routes: Routes = [
   {path:'recipes' , component:RecipesComponent , children:[
     {path:'' , component:NoPageComponent},
+    {path:'new' ,component:EditPageComponent },
     {path:':id' , component:RecipesDetailsComponent},
     {path:':id/edit' , component:EditPageComponent}
   ]},
