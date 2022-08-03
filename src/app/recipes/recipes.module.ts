@@ -1,7 +1,7 @@
 import { Ingredient } from "../shopping/shop.module";
 
 export class Recipes{ 
- public name:String;
+ public name:string;
  public description:string;
  public  imagepath:string;
  public ingredient:Ingredient[]

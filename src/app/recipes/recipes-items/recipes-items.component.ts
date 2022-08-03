@@ -13,7 +13,14 @@ export class RecipesItemsComponent implements OnInit {
   constructor(private recipesrv:RecipesServices ,private route:Router , private activeroute:ActivatedRoute) { }
 
   ngOnInit() {
+    this.recipesrv.recipechanged.subscribe(
+      (recipe:Recipes[])=>{
+        this.recipearray = recipe
+        console.log(recipe)
+      }
+    )
   this.recipearray = this.recipesrv.getrecipe()
+
   }
   
   redirecto(){
