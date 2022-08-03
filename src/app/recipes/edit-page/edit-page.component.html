@@ -13,20 +13,27 @@
             <input type="text" id="recipe" formControlName="name"  class="form-control">
         </div>
     </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <label for="url">Image URL</label>
+            <input type="text" id="url" formControlName="Imageurl"   class="form-control" #Imageurl>
+        </div>
+    </div>
+     <div class="row">
+        <div class="col-xs-12">
+            <img [src]="Imageurl.value" class="img-responsive"      />
+        </div>
+     </div>
 
     <div class="row">
         <div class="col-xs-12">
             <label for="descrip">Description</label>
-            <input type="text" id="descrip" formControlName="descript"   class="form-control">
+            <textarea  id="descrip" cols="30" rows="5"  formControlName="descript"   class="form-control"></textarea>
+          
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-xs-12">
-            <label for="url">Image URL</label>
-            <input type="text" id="url" formControlName="Imageurl"   class="form-control">
-        </div>
-    </div>
+      
 
        <div>
         <button class="btn  btn-success" (click)="createingredient()"  type="button">New Ingredient</button>
@@ -44,7 +51,7 @@
                     <input type="text" formControlName="amount" class="form-control">
                 </div>
                 <div class="col-xs-2">
-                    <button class="btn btn-danger"  type="button">X</button>
+                    <button class="btn btn-danger"  type="button"  (click)="onDeleteingredient(i)"   >X</button>
                 </div>
             </div>
        </div>

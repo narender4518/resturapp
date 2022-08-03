@@ -103,5 +103,10 @@ get newingredient(){
   }
   onclear(){
     this.editformRecipes.reset()
+    this.router.navigate(['../'], {relativeTo:this.activerot})
+  }
+  onDeleteingredient(index:number){
+  // this will clear the entire formarray completly  (<FormArray>this.editformRecipes.get('ingredient')).clear()
+    (<FormArray>this.editformRecipes.get('ingredient')).removeAt(index)
   }
 }

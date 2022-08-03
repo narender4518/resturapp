@@ -49,7 +49,11 @@ constructor(private shopsrv:ShopServices){}
 
    }
 
+   ondeleterecipe(id:number){
+    this.recipe.splice(id , 1)
+    this.recipechanged.next(this.recipe.slice())
 
+   }
 
 
 }
