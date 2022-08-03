@@ -12,7 +12,7 @@ export class RecipesServices{
 constructor(private shopsrv:ShopServices){}
   recipechanged = new Subject<Recipes[]>();
  recipeselected = new EventEmitter<Recipes[]>() 
-  recipe:Recipes[]   =[
+  /*recipe:Recipes[]   =[
     new Recipes('Biriyani' , 
         'Biryani is a mixed rice dish originating among the Muslims of the Indian subcontinent' , 
         'http://en.wikipedia.org/wiki/Special:FilePath/Biryani_of_Lahore.jpg' ,
@@ -21,8 +21,15 @@ constructor(private shopsrv:ShopServices){}
             ),
       new Recipes('Pizza' ,  'testy' ,'https://1fbbr13qhcm41ppjbr450rsxt72-wpengine.netdna-ssl.com/wp-content/uploads/2016/02/meatMadness-2.jpg' ,
         [new Ingredient('chicken' ,200)]        )
-  ]
+  ]*/
+
+   recipe:Recipes[] =[]
   
+    backenddata(serverrecipe:Recipes[]){
+      this.recipe=serverrecipe;
+      this.recipechanged.next(this.recipe.slice())
+
+    } 
 
    getrecipe(){
     return this.recipe.slice()

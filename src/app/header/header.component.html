@@ -1,6 +1,7 @@
 <div class="header">
+   <div class="first-part">
     <div class="logo">
-        Restaurent
+      <span>NM's</span> Restaurent
     </div>
    <ul class="list-group">
     <li class="list-group-item" routerLinkActive="active" routerLink="recipes">
@@ -10,7 +11,31 @@
        Shopping 
     </li>
    </ul>
+</div>
 
-
+   <div class="row">
+      <div class="col-xs-12">
+          <div class="btn-group" appRecipes>
+        
+           <button  type="button" 
+            class="btn dropdown-toggle" >Manage Recipe <span class="caret"></span></button>
+     
+   
+   
+       <ul class="dropdown-menu">
+             
+               <li><a style="cursor: pointer;" (click)="savedata()" >Save Data</a></li>
+               <li><a style="cursor: pointer;" (click)="onFetchdata()">Fetch Data</a></li>
+       </ul>
+   
+   </div>
+   
+        
+   
+   
+   
+   
+      </div>
+   </div>
 
 </div>

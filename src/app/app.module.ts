@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import {HttpClientModule}  from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
@@ -13,6 +14,7 @@ import { ShopEditComponent } from './shopping/shop-edit/shop-edit.component';
 import { RecipesDirective } from './recipes.directive';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EditPageComponent } from './recipes/edit-page/edit-page.component';
+import { AuthComponent } from './auth/auth.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,14 +26,16 @@ import { EditPageComponent } from './recipes/edit-page/edit-page.component';
     ShoppingComponent,
     ShopEditComponent,
     RecipesDirective,
-    EditPageComponent
+    EditPageComponent,
+    AuthComponent
   ],
   imports: [
    
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
    
   ],
   providers: [],

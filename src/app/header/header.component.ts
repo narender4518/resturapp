@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Dataservices } from 'src/assets/data.services';
+import { Recipes } from '../recipes/recipes.module';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private datasrv:Dataservices) { }
 
   ngOnInit(): void {
   }
 
+  savedata(){
+   this.datasrv.sendingdatatoserver()
+  }
+  onFetchdata(){
+    this.datasrv.onFetchdata().subscribe();
+  }
 }
