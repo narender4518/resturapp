@@ -1,0 +1,21 @@
+.password-box{
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+     align-items: center;
+    border-radius: 8px;
+    padding-right: 15px ;
+    background-color: 	 #e6f2ff;
+}
+
+.password-box input{
+    width: 95%;
+    padding: 6px;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+   
+    
+}
+
+

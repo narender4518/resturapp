@@ -15,6 +15,7 @@ import { RecipesDirective } from './recipes.directive';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EditPageComponent } from './recipes/edit-page/edit-page.component';
 import { AuthComponent } from './auth/auth.component';
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +28,8 @@ import { AuthComponent } from './auth/auth.component';
     ShopEditComponent,
     RecipesDirective,
     EditPageComponent,
-    AuthComponent
+    AuthComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
    

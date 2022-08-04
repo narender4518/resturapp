@@ -1,6 +1,13 @@
 <div class="row">
     <div class="col-xs-12 col-md-6 col-md-offset-3">
-        <form (ngSubmit)="onsubmit(singupform)" #singupform="ngForm">
+        <div    *ngIf="isloading"  style="text-align:center ;">
+            <app-loading-spinner></app-loading-spinner>
+        </div>
+        <div class="alert alert-danger" style="padding: 10px; display: flex; justify-content: space-between; align-items: center;     " *ngIf="error">
+            <p>{{error}}</p>
+            <i class="fa fa-times" (click)="closetheerror()" aria-hidden="true"></i>
+        </div>
+        <form (ngSubmit)="onsubmit(singupform)" #singupform="ngForm"   *ngIf="!isloading">
             <div class="row">
                 <div class="col-xs-12">
                     <label for="username">UserName</label>
@@ -16,18 +23,21 @@
             <div class="row">
                 <div class="col-xs-12">
                     <label for="password">Password</label>
-                    <input type="text" 
-                    class="form-control"
+                    <div class="password-box">
+                    <input [type]="isShowpass? 'password':'text' " 
                      id="password"
                      ngModel
                      name="password"
                      required
                      minlength="6"  />
+                     <i  [ngClass]="isShowpass? 'fa fa-eye-slash' : 'fa fa-eye' " aria-hidden="true" (click)="  onclickshowpasswrd()"></i>
+
+                    </div>
+
                 </div>
             </div>
    
-            <i class="fa fa-eye" aria-hidden="true"></i>
-            <i class="fa fa-eye-slash" aria-hidden="true"></i>
+          
             <div style="margin-top: 20px;">
                 <button class="btn btn-primary" type="submit" [disabled]="!singupform.valid"> {{isLogging? 'Login' : 'Sign Up' }}</button> |
                 <button class="btn btn-primary" type="button" (click)="onSwitchlogin()">Swith to  {{isLogging?   'Sign Up' : 'Login'}}</button>
