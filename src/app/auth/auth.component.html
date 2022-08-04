@@ -1,1 +1,37 @@
-<p>auth works!</p>
+<div class="row">
+    <div class="col-xs-12 col-md-6 col-md-offset-3">
+        <form (ngSubmit)="onsubmit(singupform)" #singupform="ngForm">
+            <div class="row">
+                <div class="col-xs-12">
+                    <label for="username">UserName</label>
+                    <input type="text"
+                     class="form-control"
+                      id="username"  
+                      ngModel
+                      name="username"   
+                      required 
+                      email           />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <label for="password">Password</label>
+                    <input type="text" 
+                    class="form-control"
+                     id="password"
+                     ngModel
+                     name="password"
+                     required
+                     minlength="6"  />
+                </div>
+            </div>
+   
+            <i class="fa fa-eye" aria-hidden="true"></i>
+            <i class="fa fa-eye-slash" aria-hidden="true"></i>
+            <div style="margin-top: 20px;">
+                <button class="btn btn-primary" type="submit" [disabled]="!singupform.valid"> {{isLogging? 'Login' : 'Sign Up' }}</button> |
+                <button class="btn btn-primary" type="button" (click)="onSwitchlogin()">Swith to  {{isLogging?   'Sign Up' : 'Login'}}</button>
+            </div>
+        </form>
+    </div>
+</div>
