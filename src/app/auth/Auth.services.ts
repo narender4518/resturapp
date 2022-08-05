@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { catchError, throwError } from "rxjs";
+import { catchError, Subject, tap, throwError } from "rxjs";
+import { User } from "./user.model";
 
 export interface AuthResponseData{
 idToken:string;
@@ -15,6 +16,7 @@ localId:string;
 export class Authservices {
   constructor(private http:HttpClient){}
   
+  user = new Subject<User>()
 	
 
    signup(emai:string , password:string){
@@ -24,7 +26,9 @@ export class Authservices {
         password:password,
         returnSecureToken:true
 
-    }).pipe(catchError(this.httperror))
+    }).pipe(catchError(this.httperror) , tap(responsereq=>{
+      this.handleresponsedata(responsereq.email , responsereq.localId , responsereq.idToken , +responsereq.expiresIn)
+    }))
 
 
    }
@@ -38,10 +42,24 @@ export class Authservices {
     password:password,
     returnSecureToken:true
 
-   }).pipe(catchError(this.httperror))
+   }).pipe(catchError(this.httperror), tap(responsereq=>{
+    this.handleresponsedata(responsereq.email , responsereq.localId , responsereq.idToken , +responsereq.expiresIn)
+  }))
 
    }
 
+
+   private handleresponsedata(email:string , id:string , token:string , expiresIn:number){
+     const expeiresdate = new Date(new Date().getTime() + expiresIn*1000)
+     const resuser = new User(
+      email,
+      id,
+      token,
+      expeiresdate
+     )
+     this.user.next(resuser)
+
+   }
 
    private httperror(erroresp:HttpErrorResponse){
     let errormessage="An UnKnow Error Occured!"
