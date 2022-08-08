@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Dataservices } from 'src/assets/data.services';
+import { Authservices } from '../auth/Auth.services';
 import { Recipes } from '../recipes/recipes.module';
 
 @Component({
@@ -8,10 +9,15 @@ import { Recipes } from '../recipes/recipes.module';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  isAuthenticated = false;
+  constructor(private datasrv:Dataservices , private Authsrv:Authservices) { }
+ 
 
-  constructor(private datasrv:Dataservices) { }
-
-  ngOnInit(): void {
+  
+  ngOnInit() {
+    this.Authsrv.user.subscribe((user)=>{
+    this.isAuthenticated= !!user
+    })
   }
 
   savedata(){
@@ -20,4 +26,12 @@ export class HeaderComponent implements OnInit {
   onFetchdata(){
     this.datasrv.onFetchdata().subscribe();
   }
+
+  logout(){
+    this.Authsrv.onlogout()
+  }
+
+
+
+
 }

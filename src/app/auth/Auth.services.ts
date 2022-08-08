@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { catchError, Subject, tap, throwError } from "rxjs";
+import { Router } from "@angular/router";
+import { BehaviorSubject, catchError, Subject, tap, throwError } from "rxjs";
 import { User } from "./user.model";
 
 export interface AuthResponseData{
@@ -14,10 +15,10 @@ localId:string;
 
 @Injectable({providedIn:'root'})
 export class Authservices {
-  constructor(private http:HttpClient){}
+  constructor(private http:HttpClient  , private router:Router){}
   
-  user = new Subject<User>()
-	
+  user = new BehaviorSubject<User>(null)
+	public tokenexpirationtimer:any;
 
    signup(emai:string , password:string){
  return   this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyD0LiQGBwrE4w4QG8_ehhd8mwzDjDU3NsQ' ,{
@@ -32,6 +33,8 @@ export class Authservices {
 
 
    }
+
+ 
 
    login(emai:string , password:string){
 
@@ -49,6 +52,43 @@ export class Authservices {
    }
 
 
+   onAuthologin(){
+   
+    const userdata:{email:string , id:string , _tocken:string , _tokenexpirationdate:number} = JSON.parse(localStorage.getItem('userdata'));
+    
+    if(!userdata){
+      return;
+    }
+
+    const loadeddata = new User(userdata.email , userdata.id , userdata._tocken , new Date(userdata._tokenexpirationdate))
+  
+     if(loadeddata.tocken){
+      this.user.next(loadeddata);
+       const timeleft = (new Date(userdata._tokenexpirationdate)).getTime() - (new Date().getTime());
+       this.onAutologout(timeleft)
+     }
+
+
+   }
+
+   onlogout(){
+    this.user.next(null);
+    this.router.navigate(['/Auth'])
+    localStorage.removeItem('userdata')
+     if(this.tokenexpirationtimer){
+      clearTimeout(this.tokenexpirationtimer)
+     }
+     this.tokenexpirationtimer= null
+   }
+
+    onAutologout(expiration:number){
+    this.tokenexpirationtimer= setTimeout(()=>{
+        this.onlogout()
+      } , expiration)
+    }
+
+
+
    private handleresponsedata(email:string , id:string , token:string , expiresIn:number){
      const expeiresdate = new Date(new Date().getTime() + expiresIn*1000)
      const resuser = new User(
@@ -58,6 +98,8 @@ export class Authservices {
       expeiresdate
      )
      this.user.next(resuser)
+     this.onAutologout(expiresIn * 1000)
+     localStorage.setItem('userdata' , JSON.stringify(resuser))
 
    }
 

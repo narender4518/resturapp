@@ -4,10 +4,10 @@
       <span>NM's</span> Restaurent
     </div>
    <ul class="list-group">
-    <li class="list-group-item" routerLinkActive="active" routerLink="recipes">
+    <li class="list-group-item" routerLinkActive="active" routerLink="recipes" *ngIf="isAuthenticated">
        Recipes 
     </li>
-    <li class="list-group-item" routerLinkActive="active" routerLink="Auth">
+    <li class="list-group-item" routerLinkActive="active" routerLink="Auth" *ngIf="!isAuthenticated">
       Authentication 
    </li>
     <li class="list-group-item" routerLinkActive="active" routerLink="Shopping">
@@ -16,8 +16,8 @@
    </ul>
 </div>
 
-<div style="display: flex; justify-content:space-between; align-items:center;">
-   <div class="logout">
+<div style="display: flex; justify-content:space-between; align-items:center;" *ngIf="isAuthenticated">
+   <div class="logout" (click)="logout()">
       <span>Logout</span>
    </div>
 

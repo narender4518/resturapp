@@ -1,6 +1,7 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { map, tap } from "rxjs";
+import { exhaustMap, map, take, tap } from "rxjs";
+import { Authservices } from "src/app/auth/Auth.services";
 import { Recipes } from "src/app/recipes/recipes.module";
 import { RecipesServices } from "src/app/recipes/recipes.serviecs";
 
@@ -8,9 +9,9 @@ import { RecipesServices } from "src/app/recipes/recipes.serviecs";
 @Injectable({providedIn:'root'})
 
 export class Dataservices {
-   constructor(private http:HttpClient  , private recipesrv:RecipesServices){}
+   constructor(private http:HttpClient  , private recipesrv:RecipesServices , private AuthSrv:Authservices){}
 
-
+   
      sendingdatatoserver(){
         const recipe= this.recipesrv.getrecipe();
 
@@ -22,8 +23,8 @@ export class Dataservices {
      }
   
       onFetchdata(){
-      return   this.http.get<Recipes[]>('https://recipeproject-6d619-default-rtdb.firebaseio.com/recipe.json')
-         .pipe(map(
+ 
+    return this.http.get<Recipes[]>('https://recipeproject-6d619-default-rtdb.firebaseio.com/recipe.json' ).pipe( map(
             recipes =>{
              return recipes.map(maprecipes=>{
                 return {...maprecipes, 
@@ -35,6 +36,7 @@ export class Dataservices {
                 this.recipesrv.backenddata(serverdata)
             }
          ))
+        
       }
 
       
